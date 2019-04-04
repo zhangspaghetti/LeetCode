@@ -1,8 +1,7 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        vector<int> result;
-        std::map<int, int> m;
+        map<int, int> m;
         for(int i = 0; i < nums.size(); i++)
         {
             if(m.find(target - nums.at(i)) == m.end())
@@ -11,11 +10,9 @@ public:
             }
             else
             {
-                result.push_back(m.find(target - nums.at(i))->second);
-                result.push_back(i);
-                return result;
+                return vector<int>{m.find(target - nums.at(i))->second, i};
             }
         }
-        return result;
+        return vector<int>{};
     }
 };
