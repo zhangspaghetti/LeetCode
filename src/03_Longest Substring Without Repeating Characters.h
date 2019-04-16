@@ -1,20 +1,17 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        set<char> hashset;
+        map<char, int> m;
         int result = 0;
-        int i = 0, j = 0;
-        while(i < s.length() && j < s.length())
+        for(int j = 0, i = 0; j < s.length(); j++)
         {
-            if(hashset.find(s.at(j)) == hashset.end())
+            if(m.find(s.at(j)) != m.end())
             {
-                hashset.insert(s.at(j++));
-                result = hashset.size() > result ? hashset.size() : result;
+                i = m.find(s.at(j))->second > i ? m.find(s.at(j))->second : i;
             }
-            else
-            {
-                hashset.erase(hashset.find(s.at(i++)));
-            }
+            result = j - i + 1 > result ? j - i + 1 : result;
+            //记录当前字符下一个的下标
+            m[s.at(j)] = j + 1;
         }
         
         return result;
