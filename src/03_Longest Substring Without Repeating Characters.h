@@ -1,24 +1,23 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        map<char, int> n;
+        set<char> hashset;
         int result = 0;
-        
         for(int i = 0; i < s.length(); i++)
         {
-            n.clear();
+            hashset.clear();
             for(int j = i; j < s.length(); j++)
             {
-                if(n.find(s.at(j)) == n.end())
-                    n[s.at(j)] = j;
+                if(hashset.find(s.at(j)) == hashset.end())
+                {
+                    hashset.insert(s.at(j));
+                }
                 else
+                {
                     break;
+                }
             }
-            
-            if(n.size() > result)
-            {
-                result = n.size();
-            }
+            result = hashset.size() > result ? hashset.size() : result;
         }
         return result;
     }
