@@ -3,22 +3,20 @@ public:
     int lengthOfLongestSubstring(string s) {
         set<char> hashset;
         int result = 0;
-        for(int i = 0; i < s.length(); i++)
+        int i = 0, j = 0;
+        while(i < s.length() && j < s.length())
         {
-            hashset.clear();
-            for(int j = i; j < s.length(); j++)
+            if(hashset.find(s.at(j)) == hashset.end())
             {
-                if(hashset.find(s.at(j)) == hashset.end())
-                {
-                    hashset.insert(s.at(j));
-                }
-                else
-                {
-                    break;
-                }
+                hashset.insert(s.at(j++));
+                result = hashset.size() > result ? hashset.size() : result;
             }
-            result = hashset.size() > result ? hashset.size() : result;
+            else
+            {
+                hashset.erase(hashset.find(s.at(i++)));
+            }
         }
+        
         return result;
     }
 };
